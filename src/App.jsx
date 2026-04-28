@@ -3,6 +3,9 @@ import GameBoard from "./components/Gameboard.jsx"
 
 export default function MainContent() {
   const [allPokemonInfo, setAllPokemonInfo] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
   const hasFetched = useRef(false);
 
   useEffect(() => { // API request for pokemon information
@@ -12,9 +15,8 @@ export default function MainContent() {
 
         try {
 
-          if (hasFetched.current === false) { // Guard for duplicate API request in strict mode
-            hasFetched.current = true;
-          } else return;
+          if (hasFetched.current) return;  // Guard for duplicate API request in strict mode
+          hasFetched.current = true;
           
           let pokemonInfo = pokemonList.map((pokemon) => (
               fetch(`${baseUrl}${pokemon}`).then((res) => res.json())
@@ -24,6 +26,7 @@ export default function MainContent() {
             
           const formattedPokemonInfo = result.map((pokemon) => ({
             name: pokemon.name,
+            id: pokemon.id,
             image: pokemon.sprites.other["official-artwork"].front_default
           }));
 
@@ -35,7 +38,36 @@ export default function MainContent() {
     };
 
     fetchData();
-}, [])
+  }, [])
+
+
+  let clickedCards = useRef(new Set());
+
+  function handleClick(cardId) {
+    if (!clickedCards.current.has(cardId)) {
+      handleWin(cardId);
+    }
+    else {
+      handleLoss();
+    }
+  }
+
+  function handleWin(cardId) {
+    const newScore = currentScore + 1;
+    setCurrentScore(newScore)
+
+    clickedCards.current.add(cardId)
+
+    if (newScore > bestScore) {
+      setBestScore(newScore)
+    }
+  }
+
+  function handleLoss() {
+    clickedCards.current.clear();
+
+    setCurrentScore(0);
+  }
 
   return (
     <div>
@@ -45,12 +77,12 @@ export default function MainContent() {
         <h2>Do your best to select each card only once!</h2>
       </div>
       <article className="score-wrapper">
-        <p>Current Score: 0</p>
-        <p>Best Score: 0</p>
+        <p>Current Score: {currentScore}</p>
+        <p>Best Score: {bestScore}</p>
         </article>
       </header>
       <main>
-        <GameBoard pokemonInfo={allPokemonInfo}/>
+        <GameBoard pokemonInfo={allPokemonInfo} handleClick={handleClick}/>
       </main>
     </div>
   )
