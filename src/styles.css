@@ -1,3 +1,9 @@
+@font-face {
+    font-family: Boogaloo;
+    src: url(./assets/fonts/Boogaloo-Regular.woff2) format(woff2),
+        url(./assets/fonts/Boogaloo-Regular.woff) format(woff);
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -33,4 +39,66 @@ p, h1, h2, h3, h4, h5, h6 {
 
 #root, #__next {
     isolation: isolate;
+}
+
+/* Header */
+
+.header-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-family: Boogaloo, 'Times New Roman', serif;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    border: 10px solid red;
+}
+
+.main-title {
+    color: #393997;
+}
+
+.score-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+}
+
+/* Card */
+
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #393997;
+    border-radius: 15px;
+    background-color: #87cefa;
+    width: 275px;
+    height: 350px;
+    padding: 5px;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    width: 100%;
+    height: 250px;
+    background-color: white;
+}
+
+.image-container img {
+    width: 100%
+}
+
+.name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Boogaloo, 'Times New Roman', serif;
+    font-size: 2.1rem;
+    letter-spacing: 2px;
+    height: 100%;
 }
