@@ -1,11 +1,16 @@
-export default function Card() {
+export default function Card({pokemonName, pokemonImage}) {
+
+    const capitalizeName = (name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    }
+
     return (
         <div className="card">
             <div className="image-container">
-                <img src="src/assets/dummy-image.png"></img>
+                <img src={pokemonImage}></img>
             </div>
             <div className="name-container">
-                <p>Mudkip</p>
+                <p>{capitalizeName(pokemonName)}</p>
             </div>
         </div>
     )
