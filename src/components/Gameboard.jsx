@@ -2,8 +2,17 @@ import Card from "./Card.jsx"
 
 export default function GameBoard() {
     return (
-        <div>
+        <section className="board-wrapper">
             <Card />
-        </div>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+        </section>
     )
 }
