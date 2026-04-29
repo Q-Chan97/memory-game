@@ -41,6 +41,19 @@ export default function MainContent() {
   }, [])
 
 
+
+  function shuffleArray(pokemonList) {
+    const arrayCopy = [...pokemonList];
+
+    for (let i = arrayCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]] 
+    }
+
+    return arrayCopy;
+  }
+
+
   let clickedCards = useRef(new Set());
 
   function handleClick(cardId) {
@@ -61,12 +74,17 @@ export default function MainContent() {
     if (newScore > bestScore) {
       setBestScore(newScore)
     }
+
+    // Shuffles array and re renders w/ allPokemonInfo state after win or loss
+    setAllPokemonInfo(shuffleArray(allPokemonInfo));
   }
 
   function handleLoss() {
     clickedCards.current.clear();
 
     setCurrentScore(0);
+
+    setAllPokemonInfo(shuffleArray(allPokemonInfo));
   }
 
   return (
