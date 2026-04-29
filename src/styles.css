@@ -52,7 +52,8 @@ p, h1, h2, h3, h4, h5, h6 {
     font-family: Boogaloo, 'Times New Roman', serif;
     letter-spacing: 2px;
     font-size: 1.1rem;
-    border: 10px solid red;
+    border: 10px solid #e52d2d;
+    background-color: white;
 }
 
 .main-title {
@@ -126,4 +127,32 @@ p, h1, h2, h3, h4, h5, h6 {
     font-size: 2.1rem;
     letter-spacing: 2px;
     height: 100%;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+
+    .header-wrapper {
+        position: relative;
+    }
+
+    .board-wrapper {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .card {
+        width: 125px;
+        height: 175px;
+    }
+
+    .card:hover {
+        box-shadow: none;
+        transform: none;
+    }
+
+    .name-container {
+        font-size: 1.4rem;
+    }
 }
